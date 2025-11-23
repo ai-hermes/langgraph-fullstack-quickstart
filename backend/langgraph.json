@@ -1,8 +1,9 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "basic": "./src/basic/graph.py:graph",
-    "basic_with_tools": "./src/basic_with_tools/graph.py:graph"
+    "basic": "./src/agent/basic/graph.py:graph",
+    "basic_with_tools": "./src/agent/basic_with_tools/graph.py:graph",
+    "advance_search": "./src/agent/advance_search/graph.py:graph"
   },
   "http": {
     "app": "./src/agent/app.py:app"
