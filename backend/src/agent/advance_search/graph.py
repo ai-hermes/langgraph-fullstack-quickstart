@@ -17,6 +17,17 @@ from agent.advance_search.utils import get_research_topic
 
 load_dotenv()
 
+from langfuse import get_client
+
+langfuse = get_client()
+
+# Verify connection
+if langfuse.auth_check():
+    print("Langfuse client is authenticated and ready!")
+else:
+    print("Authentication failed. Please check your credentials and host.")
+
+
 llm = ChatOpenAI(
     base_url=os.environ.get("LLM_API_URL"),
     api_key=SecretStr(os.environ.get("LLM_API_KEY")),
@@ -193,4 +204,7 @@ builder.add_conditional_edges(
 # Finalize the answer
 builder.add_edge("finalize_answer", END)
 
-graph = builder.compile()
+from langfuse.langchain import CallbackHandler
+langfuse_handler = CallbackHandler()
+
+graph = builder.compile().with_config({"callbacks": [langfuse_handler]})

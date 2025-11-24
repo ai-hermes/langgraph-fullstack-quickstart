@@ -9,7 +9,7 @@ from typing_extensions import Annotated
 
 
 def keep_it(left, right):
-    return right
+    return max(left, right)
 
 class OverallState(BaseModel):
     messages: Annotated[list[AnyMessage], operator.add] = []
