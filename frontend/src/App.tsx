@@ -25,7 +25,7 @@ export default function App() {
     apiUrl: import.meta.env.DEV
       ? "http://localhost:2024"
       : "http://localhost:8123",
-    assistantId: "agent",
+    assistantId: "advance_search",
     messagesKey: "messages",
     onUpdateEvent: (event: any) => {
       let processedEvent: ProcessedEvent | null = null;
@@ -136,9 +136,14 @@ export default function App() {
       ];
       thread.submit({
         messages: newMessages,
-        initial_search_query_count: initial_search_query_count,
-        max_research_loops: max_research_loops,
-        reasoning_model: model,
+      }, {
+          config: {
+              configurable: {
+                  "initial_search_query_count": initial_search_query_count,
+                  "max_research_loops": max_research_loops,
+                  "reasoning_model": model,
+              },
+          }
       });
     },
     [thread]
